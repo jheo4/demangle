@@ -10,6 +10,8 @@
 
 #ifdef INJECT_NAMESPACE
 #define INJECTION DEMANGLE_NAMESPACE::
+#else
+#define INJECTION   
 #endif
 
 #if defined( _CXXABI_H )
