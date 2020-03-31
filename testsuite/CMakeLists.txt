@@ -7,7 +7,7 @@ set( TESTAPPS #list apps
 
 
 foreach( APP ${TESTAPPS} )
- add_executable( ${APP} "${APP}.cpp" )
- target_link_libraries( ${APP} demangle )
- add_test( NAME "${APP}_test" COMMAND ${APP} )
+ add_executable( "${APP}_demangle" "${APP}.cpp" )
+ target_link_libraries( "${APP}_demangle" demangle )
+ add_test( NAME "${APP}_demangle_test" COMMAND "${APP}_demangle" )
 endforeach( APP ${TESTAPPS} )
