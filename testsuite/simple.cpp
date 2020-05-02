@@ -22,7 +22,9 @@
 #include <typeinfo>
 #include <iostream>
 
-struct foobar
+struct 
+//try to ensure no name collision with injected namespace
+_foobar_123456 
 {
     /** random stuff for fun **/
     int a;
@@ -36,13 +38,13 @@ int main()
      * looks a bit funny, but injects the namespace where and when 
      * needed. 
      */
-    foobar f;
+    _foobar_123456 f;
     std::string output = 
-#ifdef INJECT_NAMESPACE
+#ifdef INJECT_DEMANGLE_NAMESPACE
     DEMANGLE_NAMESPACE::
 #endif
     demangle( typeid( f ).name() );
-    if( output.compare( "foobar" ) != 0 /** if they're not equal **/ )
+    if( output.compare( "_foobar_123456" ) != 0 /** if they're not equal **/ )
     {
         return( EXIT_FAILURE );
     }

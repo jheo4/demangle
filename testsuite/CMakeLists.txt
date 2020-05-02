@@ -3,6 +3,7 @@ set( CMAKE_INCLUDE_CURRENT_DIR ON )
 
 set( TESTAPPS #list apps
         simple
+        stringdemangle
     )
 
 

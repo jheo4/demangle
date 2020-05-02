@@ -21,11 +21,11 @@
 #define _DEMANGLE_ 1
 #include <string>
 
-#ifdef INJECT_NAMESPACE
+#ifdef INJECT_DEMANGLE_NAMESPACE
 namespace DEMANGLE_NAMESPACE {
 #endif
     std::string demangle(   const char *name );
-#ifdef INJECT_NAMESPACE
+#ifdef INJECT_DEMANGLE_NAMESPACE
 } /** end namespace **/
 #endif /** end inject namespace **/
 

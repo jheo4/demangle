@@ -28,7 +28,7 @@
 # include <cxxabi.h>
 #endif
 
-#ifdef INJECT_NAMESPACE
+#ifdef INJECT_DEMANGLE_NAMESPACE
 #define INJECTION DEMANGLE_NAMESPACE::
 #else
 #define INJECTION   
@@ -48,3 +48,5 @@ INJECTION demangle(const char *name) {
 std::string 
 INJECTION demangle(const char *name) { return std::string(name); }
 #endif
+
+#undef INJECTION
