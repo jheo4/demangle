@@ -23,15 +23,9 @@
 #if defined( __clang__ ) && defined( __has_include )
 # if __has_include(<cxxabi.h>)
 # include <cxxabi.h>
-# ifndef _CXXABI_H
-# define _CXXABI_H 1
-# endif
 # endif
 #elif defined( __GLIBCXX__ ) || defined( __GLIBCPP__ )
 # include <cxxabi.h>
-# ifndef _CXXABI_H
-# define _CXXABI_H 1
-# endif
 #endif
 
 #ifdef INJECT_DEMANGLE_NAMESPACE
@@ -41,7 +35,7 @@
 #endif
 
 
-#if defined( _CXXABI_H )
+#if defined( _CXXABI_H ) || defined( __CXXABI_H )
 std::string 
 INJECTION demangle(const char *name) {
   int status = -4;
