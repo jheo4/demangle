@@ -23,12 +23,15 @@
 #if defined( __clang__ ) && defined( __has_include )
 # if __has_include(<cxxabi.h>)
 # include <cxxabi.h>
-# ifdef __APPLE__
+# ifndef _CXXABI_H
 # define _CXXABI_H 1
-# endif 
+# endif
 # endif
 #elif defined( __GLIBCXX__ ) || defined( __GLIBCPP__ )
 # include <cxxabi.h>
+# ifndef _CXXABI_H
+# define _CXXABI_H 1
+# endif
 #endif
 
 #ifdef INJECT_DEMANGLE_NAMESPACE
