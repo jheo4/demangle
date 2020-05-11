@@ -1,8 +1,14 @@
 list( APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 
+if( NOT WIN32 )
+set( OPTIONAL simple )
+else()
+set( OPTIONAL "" )
+endif()
+
 set( TESTAPPS #list apps
-        simple
+        ${OPTIONAL}
         stringdemangle
     )
 
