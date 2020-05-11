@@ -1,7 +1,7 @@
 /**
  * simple.hpp - 
  * @author: Jonathan Beard
- * @version: Fri Sep 12 10:28:33 2014
+ * @version: Sun 20 May  19:54:33 2020
  * 
  * Copyright 2014 Jonathan Beard
  * 
@@ -46,6 +46,7 @@ int main()
     demangle( typeid( f ).name() );
     if( output.compare( "_foobar_123456" ) != 0 /** if they're not equal **/ )
     {
+        std::cout << output << "\n";
         return( EXIT_FAILURE );
     }
     return( EXIT_SUCCESS );

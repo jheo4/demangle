@@ -23,6 +23,9 @@
 #if defined( __clang__ ) && defined( __has_include )
 # if __has_include(<cxxabi.h>)
 # include <cxxabi.h>
+# ifdef __APPLE__
+# define _CXXABI_H 1
+# endif 
 # endif
 #elif defined( __GLIBCXX__ ) || defined( __GLIBCPP__ )
 # include <cxxabi.h>
@@ -33,6 +36,7 @@
 #else
 #define INJECTION   
 #endif
+
 
 #if defined( _CXXABI_H )
 std::string 
