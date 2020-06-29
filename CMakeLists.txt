@@ -35,6 +35,41 @@ endif( DEMANGLE_CUSTOM_NAMESPACE )
 include_directories ( ${PROJECT_SOURCE_DIR} )
 include_directories ( ${PROJECT_SOURCE_DIR}/include )
 add_subdirectory( src )
+add_subdirectory( include )
+
+
+##
+# make and setup pkg-config
+##
+if( NOT WIN32 )
+mark_as_advanced( PKG_CONFIG_PATHWAY )
+set( PKG_CONFIG_PATH "" CACHE STRING "Set the pkg-config path, othwerwise will figure out" )
+if( NOT PKG_CONFIG_PATH )
+execute_process( COMMAND  pkg-config --variable pc_path pkg-config 
+                 COMMAND  tr ':' '\n' 
+                 COMMAND  head -n 1
+                 OUTPUT_VARIABLE LOCAL_PKG_CONFIG_PATHWAY )
+set( PKG_CONFIG_PATH ${LOCAL_PKG_CONFIG_PATHWAY} )
+endif()
+
+string(REPLACE ":" ";" PREFIX_LIST "${CMAKE_SYSTEM_PREFIX_PATH}")
+list(FIND PREFIX_LIST ${CMAKE_INSTALL_PREFIX}  _index)
+
+if(${_index} GREATER 0)
+    file( MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/pkgconfig ) 
+    set( PKG_CONFIG_PATH ${CMAKE_INSTALL_PREFIX}/pkgconfig )
+    message( WARNING "You should set PKG_CONFIG_PATH=${CMAKE_INSTALL_PREFIX}/pkgconfig/:$PKG_CONFIG_PATH when installing to non-standard prefix for pkg-config to work correctly!" )
+else()
+    message( STATUS "Setting PKG_CONFIG_PATH to: ${PKG_CONFIG_PATH}" )
+endif()
+
+
+
+configure_file( "demangle.pc.in" "demangle.pc" @ONLY )
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/demangle.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/pkgconfig/ )
+endif( NOT WIN32 )
+
+
 
 mark_as_advanced( BUILD_TESTS )
 set( BUILD_TESTS true CACHE BOOL "Tests build target available if true" )
