@@ -38,10 +38,10 @@ add_subdirectory( src )
 add_subdirectory( include )
 
 
+if( NOT WIN32 )
 ##
 # make and setup pkg-config
 ##
-if( NOT WIN32 )
 mark_as_advanced( PKG_CONFIG_PATHWAY )
 set( PKG_CONFIG_PATH "" CACHE STRING "Set the pkg-config path, othwerwise will figure out" )
 if( NOT PKG_CONFIG_PATH )
@@ -49,6 +49,7 @@ execute_process( COMMAND  pkg-config --variable pc_path pkg-config
                  COMMAND  tr ':' '\n' 
                  COMMAND  head -n 1
                  OUTPUT_VARIABLE LOCAL_PKG_CONFIG_PATHWAY )
+string(REGEX REPLACE "\n$" "" LOCAL_PKG_CONFIG_PATHWAY "${LOCAL_PKG_CONFIG_PATHWAY}")
 set( PKG_CONFIG_PATH ${LOCAL_PKG_CONFIG_PATHWAY} )
 endif()
 
@@ -64,10 +65,11 @@ else()
 endif()
 
 
-
 configure_file( "demangle.pc.in" "demangle.pc" @ONLY )
-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/demangle.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/pkgconfig/ )
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/demangle.pc DESTINATION ${PKG_CONFIG_PATH} )
 endif( NOT WIN32 )
+
+
 
 
 
