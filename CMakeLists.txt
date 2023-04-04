@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
 project(demangle)
 set( version 1.1 )
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 ##
 # DEMANGLE_CUSTOM_NAMESPACE - set to true if you want 
